@@ -2,8 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [Unreleased] - 2025-04-28
 
 ### Added
 
 *   Initial release.
+*   Added Food, Exercise, UserFoodLog, UserExerciseLog, and UserSleepLog entities.
+*   Added repositories for all entities.
+*   Added Swagger configuration.
+*   Updated UserSleepLog to record sleep and wake up times.

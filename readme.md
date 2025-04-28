@@ -2,13 +2,22 @@
 
 This is a simple self recorder project.
 
-## Usage
+## 功能
+
+*   記錄食物與熱量
+*   記錄運動與熱量
+*   記錄使用者記錄食物的時間點
+*   記錄使用者記錄運動的時間點
+*   記錄使用者記錄睡覺與起床時間
+
+## 使用方式
 
 To use this project, you need to:
 
 1.  Clone the repository.
 2.  Build the project using Maven.
 3.  Run the project.
+4.  Access Swagger UI at `http://localhost:8080/swagger-ui.html` to test the API.
 
 ## Contributing
 
