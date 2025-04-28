@@ -1,3 +1,6 @@
+server:
+  port: 12799
+
 spring:
   application:
     name: self-recorder
@@ -11,7 +14,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
   security:
     oauth2:
       client:

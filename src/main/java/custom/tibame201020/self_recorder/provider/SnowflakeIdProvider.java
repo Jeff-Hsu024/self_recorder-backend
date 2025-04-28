@@ -1,9 +1,9 @@
 package custom.tibame201020.self_recorder.provider;
 
-import java.util.UUID;
-
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+
+import java.util.UUID;
 
 @Component
 public class SnowflakeIdProvider {

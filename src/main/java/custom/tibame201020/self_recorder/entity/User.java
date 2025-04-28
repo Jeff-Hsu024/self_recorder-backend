@@ -1,9 +1,13 @@
 package custom.tibame201020.self_recorder.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
-import java.util.UUID;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
+
+import java.util.UUID;
 
 /**
  * 使用者 Entity。

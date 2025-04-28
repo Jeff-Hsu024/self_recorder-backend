@@ -3,18 +3,19 @@ package custom.tibame201020.self_recorder.service;
 import custom.tibame201020.self_recorder.entity.User;
 import custom.tibame201020.self_recorder.entity.UserExerciseLog;
 import custom.tibame201020.self_recorder.repository.UserExerciseLogRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class UserExerciseLogService {
 
-    @Autowired
-    private UserExerciseLogRepository userExerciseLogRepository;
+    private final UserExerciseLogRepository userExerciseLogRepository;
+
+    public UserExerciseLogService(UserExerciseLogRepository userExerciseLogRepository) {
+        this.userExerciseLogRepository = userExerciseLogRepository;
+    }
 
     public List<UserExerciseLog> getAllUserExerciseLogs(User user) {
         return userExerciseLogRepository.findByUser(user);
