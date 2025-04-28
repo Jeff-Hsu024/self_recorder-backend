@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: self-recorder
+  r2dbc:
+    url: r2dbc:h2:mem:testdb
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver

@@ -2,6 +2,7 @@ package custom.tibame201020.self_recorder.provider;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.mock.env.MockEnvironment;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +16,10 @@ public class SnowflakeIdProviderTest {
 
     @BeforeEach
     public void setUp() {
-        snowflakeIdProvider = new SnowflakeIdProvider(0L, 0L);
+        MockEnvironment mockEnvironment = new MockEnvironment();
+        mockEnvironment.setProperty("provider.snowflake.worker-id", "0");
+        mockEnvironment.setProperty("provider.snowflake.data-center-id", "0");
+        snowflakeIdProvider = new SnowflakeIdProvider(mockEnvironment);
     }
 
     @Test

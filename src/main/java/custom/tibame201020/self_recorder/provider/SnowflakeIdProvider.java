@@ -30,25 +30,17 @@ public class SnowflakeIdProvider {
     private long sequence = 0L;
     private long lastTimestamp = -1L;
 
-    public SnowflakeIdProvider() {
-        this.workerId = 0;
-        this.dataCenterId = 0;
-    }
-
     public SnowflakeIdProvider(Environment environment) {
-        this(
-            environment.getRequiredProperty(WORKER_ID_PROPERTY, Long.class),
-            environment.getRequiredProperty(DATA_CENTER_ID_PROPERTY, Long.class)
-        );
-    }
+        long workerId = environment.getRequiredProperty(WORKER_ID_PROPERTY, Long.class);
+        long dataCenterId = environment.getRequiredProperty(DATA_CENTER_ID_PROPERTY, Long.class);
 
-    public SnowflakeIdProvider(long workerId, long dataCenterId) {
         if (workerId > MAX_WORKER_ID || workerId < 0) {
             throw new IllegalArgumentException(String.format("Worker ID cannot be greater than %d or less than 0", MAX_WORKER_ID));
         }
         if (dataCenterId > MAX_DATA_CENTER_ID || dataCenterId < 0) {
             throw new IllegalArgumentException(String.format("DataCenter ID cannot be greater than %d or less than 0", MAX_DATA_CENTER_ID));
         }
+
         this.workerId = workerId;
         this.dataCenterId = dataCenterId;
     }
