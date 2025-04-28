@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased] - 2025-04-28
 
+### Changed
+
+*   Modified Food entity to include unit information.
+*   Modified UserFoodLog entity to include quantity and unit information (unit is optional).
+*   Modified Exercise entity to include unit information.
+*   Modified UserExerciseLog entity to include quantity and unit information (unit is optional).
+
 ### Added
 
 *   Initial release.

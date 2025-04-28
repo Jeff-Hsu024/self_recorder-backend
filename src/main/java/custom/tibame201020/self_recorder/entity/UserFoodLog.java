@@ -1,58 +1,43 @@
 package custom.tibame201020.self_recorder.entity;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-/**
- * 使用者食物記錄 Entity，記錄使用者、食物、開始時間和結束時間資訊。
- */
-@Entity
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Schema(description = "使用者食物記錄")
+@Entity
+@Table(name = "user_food_log")
 public class UserFoodLog {
 
-    /**
-     * 記錄 ID。
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Schema(description = "記錄 ID")
-    private Long id;
+    @Column(name = "user_food_log_id")
+    private Long userFoodLogId;
 
-    /**
-     * 使用者。
-     */
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    @Schema(description = "使用者")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    /**
-     * 食物。
-     */
     @ManyToOne
-    @JoinColumn(name = "food_id")
-    @Schema(description = "食物")
+    @JoinColumn(name = "food_id", nullable = false)
     private Food food;
 
-    /**
-     * 開始時間。
-     */
-    @Schema(description = "開始時間")
-    private LocalDateTime startTime;
+    // 修改的欄位：使用者攝取的食物數量
+    @Column(name = "quantity", nullable = false)
+    private Double quantity;
 
-    /**
-     * 結束時間。
-     */
-    @Schema(description = "結束時間")
-    private LocalDateTime endTime;
+    // 修改的欄位：使用者攝取的食物單位 (可選)
+    @Column(name = "unit")
+    private String unit;
+
+    @Column(name = "log_time", nullable = false)
+    private LocalDateTime logTime;
 }

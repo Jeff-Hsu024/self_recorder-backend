@@ -1,40 +1,34 @@
 package custom.tibame201020.self_recorder.entity;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-/**
- * 運動 Entity，記錄運動名稱和消耗的熱量資訊。
- */
-@Entity
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Schema(description = "運動")
+@Entity
+@Table(name = "exercise")
 public class Exercise {
 
-    /**
-     * 運動 ID。
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Schema(description = "運動 ID")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "exercise_id")
+	private Long exerciseId;
 
-    /**
-     * 運動名稱。
-     */
-    @Schema(description = "運動名稱")
-    private String name;
+	@Column(name = "exercise_name", nullable = false)
+	private String exerciseName;
 
-    /**
-     * 消耗的熱量 (每單位)。
-     */
-    @Schema(description = "消耗的熱量 (每單位)")
-    private Double caloriesBurned;
+	@Column(name = "calories_per_unit", nullable = false)
+	private Double caloriesPerUnit;
+
+	// 新增的欄位
+	@Column(name = "unit", nullable = false)
+	private String unit;
+
+	@Column(name = "description")
+	private String description;
+
 }

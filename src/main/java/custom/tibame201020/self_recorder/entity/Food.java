@@ -1,69 +1,50 @@
 package custom.tibame201020.self_recorder.entity;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-/**
- * 食物 Entity，記錄食物名稱和熱量資訊。
- */
-@Entity
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Schema(description = "食物")
+@Entity
+@Table(name = "food")
 public class Food {
 
-    /**
-     * 食物 ID。
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Schema(description = "食物 ID")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "food_id")
+	private Long foodId;
 
-    /**
-     * 食物名稱。
-     */
-    @Schema(description = "食物名稱")
-    private String name;
+	@Column(name = "food_name", nullable = false)
+	private String foodName;
 
-    /**
-     * 熱量 (每單位)。
-     */
-    @Schema(description = "熱量 (每單位)")
-    private Double calories;
+	@ManyToOne
+	@JoinColumn(name = "food_category_id", nullable = false)
+	private FoodCategory foodCategory;
 
-    /**
-     * 建立者。
-     */
-    @Schema(description = "建立者")
-    private String createUser;
+	@ManyToOne
+	@JoinColumn(name = "food_type_id", nullable = false)
+	private FoodType foodType;
 
-    /**
-     * 食物類別。
-     */
-    @ManyToOne
-    @JoinColumn(name = "food_category_id")
-    @Schema(description = "食物類別")
-    private FoodCategory foodCategory;
+	@Column(name = "calories_per_unit", nullable = false)
+	private Double caloriesPerUnit;
 
-    /**
-     * 食物類型 (原形食物, 加工食品)。
-     */
-    @ManyToOne
-    @JoinColumn(name = "food_type_id")
-    @Schema(description = "食物類型 (原形食物, 加工食品)")
-    private FoodType foodType;
+	// 新增的欄位
+	@Column(name = "unit", nullable = false)
+	private String unit;
+
+	@Column(name = "protein", nullable = false)
+	private Double protein;
+
+	@Column(name = "fat", nullable = false)
+	private Double fat;
+
+	@Column(name = "carbohydrates", nullable = false)
+	private Double carbohydrates;
+
 }
