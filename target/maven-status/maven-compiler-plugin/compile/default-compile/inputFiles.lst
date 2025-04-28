@@ -1,0 +1,3 @@
+/workspaces/self_recorder-backend/src/main/java/custom/tibame201020/self_recorder/SelfRecorderApplication.java
+/workspaces/self_recorder-backend/src/main/java/custom/tibame201020/self_recorder/SnowflakeIdProvider.java
+/workspaces/self_recorder-backend/src/main/java/custom/tibame201020/self_recorder/entity/User.java
