@@ -34,10 +34,6 @@ public class UserExerciseLog {
     @Column(name = "quantity", nullable = false)
     private Double quantity;
 
-    // 修改的欄位：使用者進行的運動單位 (可選)
-    @Column(name = "unit")
-    private String unit;
-
     @Column(name = "log_time", nullable = false)
     private LocalDateTime logTime;
 }

@@ -34,10 +34,6 @@ public class UserFoodLog {
     @Column(name = "quantity", nullable = false)
     private Double quantity;
 
-    // 修改的欄位：使用者攝取的食物單位 (可選)
-    @Column(name = "unit")
-    private String unit;
-
     @Column(name = "log_time", nullable = false)
     private LocalDateTime logTime;
 }

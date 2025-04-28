@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 體重記錄 Entity，記錄使用者、記錄日期和體重資訊。
@@ -39,8 +39,8 @@ public class WeightRecord {
     /**
      * 記錄日期。
      */
-    @Schema(description = "記錄日期")
-    private LocalDate recordDate;
+    @Schema(description = "記錄時間")
+    private LocalDateTime recordDatetime;
 
     /**
      * 體重 (公斤)。
