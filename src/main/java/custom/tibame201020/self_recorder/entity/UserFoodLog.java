@@ -26,13 +26,17 @@ public class UserFoodLog {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "food_id", nullable = false)
-    private Food food;
+    @Column(name = "food_name", nullable = false)
+    private String foodName;
 
-    // 修改的欄位：使用者攝取的食物數量
-    @Column(name = "quantity", nullable = false)
-    private Double quantity;
+    @Column(name = "calories", nullable = false)
+    private Double calories;
+
+    @Column(name = "description", nullable = false)
+    private String description;
+
+    @Column(name = "eat_time", nullable = false)
+    private LocalDateTime eatTime;
 
     @Column(name = "log_time", nullable = false)
     private LocalDateTime logTime;

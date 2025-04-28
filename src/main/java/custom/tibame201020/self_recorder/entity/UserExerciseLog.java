@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import custom.tibame201020.self_recorder.entity.User;
 
 @Data
 @Entity
@@ -26,13 +27,23 @@ public class UserExerciseLog {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "exercise_id", nullable = false)
-    private Exercise exercise;
+    @Column(name = "exercise_name", nullable = false)
+    private String exerciseName;
 
-    // 修改的欄位：使用者進行的運動數量
-    @Column(name = "quantity", nullable = false)
-    private Double quantity;
+    @Column(name = "intensity")
+    private String intensity;
+
+    @Column(name = "duration", nullable = false)
+    private Double duration;
+
+    @Column(name = "calories", nullable = false)
+    private Double calories;
+
+    @Column(name = "description", nullable = false)
+    private String description;
+
+    @Column(name = "exercise_time", nullable = false)
+    private LocalDateTime exerciseTime;
 
     @Column(name = "log_time", nullable = false)
     private LocalDateTime logTime;

@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "體重記錄")
-public class WeightRecord {
+public class UserWeightLog {
 
     /**
      * 記錄 ID。
@@ -47,4 +47,7 @@ public class WeightRecord {
      */
     @Schema(description = "體重 (公斤)")
     private Double weight;
+
+    @Column(name = "log_time", nullable = false)
+    private LocalDateTime logTime;
 }
