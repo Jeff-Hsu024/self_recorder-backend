@@ -2,10 +2,14 @@ package custom.tibame201020.self_recorder.provider;
 
 import java.util.UUID;
 
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SnowflakeIdProvider {
+
+    private static final String WORKER_ID_PROPERTY = "provider.snowflake.worker-id";
+    private static final String DATA_CENTER_ID_PROPERTY = "provider.snowflake.data-center-id";
 
     private final long EPOCH = 1609459200000L; // 2021-01-01 00:00:00 UTC
     private final long WORKER_ID_BITS = 5L;
@@ -25,6 +29,18 @@ public class SnowflakeIdProvider {
     private final long dataCenterId;
     private long sequence = 0L;
     private long lastTimestamp = -1L;
+
+    public SnowflakeIdProvider() {
+        this.workerId = 0;
+        this.dataCenterId = 0;
+    }
+
+    public SnowflakeIdProvider(Environment environment) {
+        this(
+            environment.getRequiredProperty(WORKER_ID_PROPERTY, Long.class),
+            environment.getRequiredProperty(DATA_CENTER_ID_PROPERTY, Long.class)
+        );
+    }
 
     public SnowflakeIdProvider(long workerId, long dataCenterId) {
         if (workerId > MAX_WORKER_ID || workerId < 0) {

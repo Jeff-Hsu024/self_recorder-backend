@@ -25,3 +25,8 @@ spring:
           github:
             client-id: ""
             client-secret: ""
+
+provider:
+  snowflake:
+    worker-id: 0
+    data-center-id: 0
