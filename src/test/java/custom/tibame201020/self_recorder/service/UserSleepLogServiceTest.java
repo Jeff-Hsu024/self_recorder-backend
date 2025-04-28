@@ -45,10 +45,10 @@ public class UserSleepLogServiceTest {
 
         List<UserSleepLog> sleepLogs = List.of(sleepLog1, sleepLog2);
 
-        when(userSleepLogRepository.findAll()).thenReturn(sleepLogs);
+        when(userSleepLogRepository.findByUser(user)).thenReturn(sleepLogs);
 
         // Act
-        List<UserSleepLog> result = userSleepLogService.getAllUserSleepLogs();
+        List<UserSleepLog> result = userSleepLogService.getAllUserSleepLogs(user);
 
         // Assert
         assertThat(result).hasSize(2);

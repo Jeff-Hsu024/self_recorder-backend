@@ -49,10 +49,10 @@ public class UserWeightLogServiceTest {
 
         List<UserWeightLog> weightLogs = List.of(weightLog1, weightLog2);
 
-        when(userWeightLogRepository.findAll()).thenReturn(weightLogs);
+        when(userWeightLogRepository.findByUser(user)).thenReturn(weightLogs);
 
         // Act
-        List<UserWeightLog> result = userWeightLogService.getAllUserWeightLogs();
+        List<UserWeightLog> result = userWeightLogService.getAllUserWeightLogs(user);
 
         // Assert
         assertThat(result).hasSize(2);

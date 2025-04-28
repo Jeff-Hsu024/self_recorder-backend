@@ -16,8 +16,8 @@ public class UserFoodLogService {
     @Autowired
     private UserFoodLogRepository userFoodLogRepository;
 
-    public List<UserFoodLog> getAllUserFoodLogs() {
-        return userFoodLogRepository.findAll();
+    public List<UserFoodLog> getAllUserFoodLogs(User user) {
+        return userFoodLogRepository.findByUser(user);
     }
 
     public UserFoodLog createUserFoodLog(User user, String foodName, Double calories, String description) {

@@ -16,8 +16,8 @@ public class UserWeightLogService {
     @Autowired
     private UserWeightLogRepository userWeightLogRepository;
 
-    public List<UserWeightLog> getAllUserWeightLogs() {
-        return userWeightLogRepository.findAll();
+    public List<UserWeightLog> getAllUserWeightLogs(User user) {
+        return userWeightLogRepository.findByUser(user);
     }
 
     public UserWeightLog createUserWeightLog(User user, Double weight) {

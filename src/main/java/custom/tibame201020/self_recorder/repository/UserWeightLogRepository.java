@@ -1,9 +1,12 @@
 package custom.tibame201020.self_recorder.repository;
 
+import custom.tibame201020.self_recorder.entity.User;
 import custom.tibame201020.self_recorder.entity.UserWeightLog;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * 體重記錄 Repository 介面，用於存取體重記錄資料。
@@ -20,4 +23,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Tag(name = "UserWeightLog", description = "體重記錄相關 API")
 public interface UserWeightLogRepository extends JpaRepository<UserWeightLog, Long> {
+
+    List<UserWeightLog> findByUser(User user);
 }

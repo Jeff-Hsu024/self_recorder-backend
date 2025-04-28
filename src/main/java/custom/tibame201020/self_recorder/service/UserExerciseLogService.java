@@ -16,8 +16,8 @@ public class UserExerciseLogService {
     @Autowired
     private UserExerciseLogRepository userExerciseLogRepository;
 
-    public List<UserExerciseLog> getAllUserExerciseLogs() {
-        return userExerciseLogRepository.findAll();
+    public List<UserExerciseLog> getAllUserExerciseLogs(User user) {
+        return userExerciseLogRepository.findByUser(user);
     }
 
     public UserExerciseLog createUserExerciseLog(User user, String exerciseName, String intensity, Double duration, Double calories, String description) {

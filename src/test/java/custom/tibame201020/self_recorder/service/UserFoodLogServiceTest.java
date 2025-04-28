@@ -51,10 +51,10 @@ public class UserFoodLogServiceTest {
 
         List<UserFoodLog> foodLogs = List.of(foodLog1, foodLog2);
 
-        when(userFoodLogRepository.findAll()).thenReturn(foodLogs);
+        when(userFoodLogRepository.findByUser(user)).thenReturn(foodLogs);
 
         // Act
-        List<UserFoodLog> result = userFoodLogService.getAllUserFoodLogs();
+        List<UserFoodLog> result = userFoodLogService.getAllUserFoodLogs(user);
 
         // Assert
         assertThat(result).hasSize(2);

@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 
 *   為 Entity 和 Repository 添加了 JavaDoc 和 Swagger Annotations。
 *   針對所有 Repository 撰寫了 DataJpaTest。
-*   針對所有 Service 撰寫了單元測試。
+*   針對所有 Service 撰寫了單元測試，並確保 `getAllUserLogs` 方法只回傳特定使用者的資料。
 
 ### Changed
 

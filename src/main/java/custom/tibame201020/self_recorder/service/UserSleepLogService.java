@@ -16,8 +16,8 @@ public class UserSleepLogService {
     @Autowired
     private UserSleepLogRepository userSleepLogRepository;
 
-    public List<UserSleepLog> getAllUserSleepLogs() {
-        return userSleepLogRepository.findAll();
+    public List<UserSleepLog> getAllUserSleepLogs(User user) {
+        return userSleepLogRepository.findByUser(user);
     }
 
     public UserSleepLog createUserSleepLog(User user, LocalDateTime sleepTime, LocalDateTime wakeUpTime) {

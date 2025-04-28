@@ -55,10 +55,10 @@ public class UserExerciseLogServiceTest {
 
         List<UserExerciseLog> exerciseLogs = List.of(exerciseLog1, exerciseLog2);
 
-        when(userExerciseLogRepository.findAll()).thenReturn(exerciseLogs);
+        when(userExerciseLogRepository.findByUser(user)).thenReturn(exerciseLogs);
 
         // Act
-        List<UserExerciseLog> result = userExerciseLogService.getAllUserExerciseLogs();
+        List<UserExerciseLog> result = userExerciseLogService.getAllUserExerciseLogs(user);
 
         // Assert
         assertThat(result).hasSize(2);
