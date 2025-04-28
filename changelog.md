@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased] - 2025-04-28
 
+### Added
+
+*   為 Entity 和 Repository 添加了 JavaDoc 和 Swagger Annotations。
+*   針對 `UserWeightLogRepository` 撰寫了 DataJpaTest。
+*   針對 `UserWeightLogService` 撰寫了單元測試。
+
 ### Changed
 
 *   Modified Food entity to include unit information.
@@ -21,4 +27,4 @@ All notable changes to this project will be documented in this file.
 *   Added createUser, foodCategory, and foodType fields to Food entity.
 *   Added WeightRecord entity.
 *   Created FoodCategory and FoodType entities.
-*   Modified Food entity to use FoodCategory and FoodType entities.
+*   Modified Food entity to use FoodCategory and FoodCategory entities.

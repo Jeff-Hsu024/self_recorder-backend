@@ -37,9 +37,9 @@ public class UserWeightLog {
     private User user;
 
     /**
-     * 記錄日期。
+     * 記錄日期時間。
      */
-    @Schema(description = "記錄時間")
+    @Schema(description = "記錄日期時間")
     private LocalDateTime recordDatetime;
 
     /**
@@ -48,6 +48,10 @@ public class UserWeightLog {
     @Schema(description = "體重 (公斤)")
     private Double weight;
 
+    /**
+     * 記錄時間 (資料庫欄位)。
+     */
+    @Schema(description = "記錄時間 (資料庫欄位)")
     @Column(name = "log_time", nullable = false)
     private LocalDateTime logTime;
 }

@@ -22,6 +22,18 @@ To use this project, you need to:
 3.  Run the project.
 4.  Access Swagger UI at `http://localhost:8080/swagger-ui.html` to test the API.
 
+## 開發環境
+
+*   Java 21
+*   Spring Boot 3.3.11
+*   Maven
+
+## 測試
+
+*   使用 JUnit 5 進行單元測試
+*   使用 Mockito 進行 Mock 物件
+*   使用 Spring Boot Test 進行整合測試
+
 ## Contributing
 
 To contribute to this project, you need to:
