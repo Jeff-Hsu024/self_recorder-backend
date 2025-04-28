@@ -1,22 +1,25 @@
-package custom.tibame201020.self_recorder;
+package custom.tibame201020.self_recorder.provider;
 
 import java.util.UUID;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class SnowflakeIdProvider {
 
-    private static final long EPOCH = 1609459200000L; // 2021-01-01 00:00:00 UTC
-    private static final long WORKER_ID_BITS = 5L;
-    private static final long DATA_CENTER_ID_BITS = 5L;
-    private static final long SEQUENCE_BITS = 12L;
+    private final long EPOCH = 1609459200000L; // 2021-01-01 00:00:00 UTC
+    private final long WORKER_ID_BITS = 5L;
+    private final long DATA_CENTER_ID_BITS = 5L;
+    private final long SEQUENCE_BITS = 12L;
 
-    private static final long MAX_WORKER_ID = ~(-1L << WORKER_ID_BITS);
-    private static final long MAX_DATA_CENTER_ID = ~(-1L << DATA_CENTER_ID_BITS);
+    private final long MAX_WORKER_ID = ~(-1L << WORKER_ID_BITS);
+    private final long MAX_DATA_CENTER_ID = ~(-1L << DATA_CENTER_ID_BITS);
 
-    private static final long WORKER_ID_SHIFT = SEQUENCE_BITS;
-    private static final long DATA_CENTER_ID_SHIFT = SEQUENCE_BITS + WORKER_ID_BITS;
-    private static final long TIMESTAMP_SHIFT = SEQUENCE_BITS + WORKER_ID_BITS + DATA_CENTER_ID_BITS;
+    private final long WORKER_ID_SHIFT = SEQUENCE_BITS;
+    private final long DATA_CENTER_ID_SHIFT = SEQUENCE_BITS + WORKER_ID_BITS;
+    private final long TIMESTAMP_SHIFT = SEQUENCE_BITS + WORKER_ID_BITS + DATA_CENTER_ID_BITS;
 
-    private static final long SEQUENCE_MASK = ~(-1L << SEQUENCE_BITS);
+    private final long SEQUENCE_MASK = ~(-1L << SEQUENCE_BITS);
 
     private final long workerId;
     private final long dataCenterId;
