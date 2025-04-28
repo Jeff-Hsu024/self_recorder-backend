@@ -7,8 +7,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 *   為 Entity 和 Repository 添加了 JavaDoc 和 Swagger Annotations。
-*   針對 `UserWeightLogRepository` 撰寫了 DataJpaTest。
-*   針對 `UserWeightLogService` 撰寫了單元測試。
+*   針對所有 Repository 撰寫了 DataJpaTest。
+*   針對所有 Service 撰寫了單元測試。
 
 ### Changed
 
