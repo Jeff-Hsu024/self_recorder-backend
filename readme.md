@@ -49,6 +49,13 @@ To use this project, you need to:
 *   Updated `application.yml` to use environment variables for sensitive information.
 *   Updated `OAuth2AuthenticationSuccessHandler` to allow customization of the redirect URL.
 
+## JWT Support
+
+*   Added JWT (JSON Web Token) for authentication and authorization.
+*   The `JwtProvider` class is responsible for generating and parsing JWT tokens.
+*   Updated `pom.xml` to include JJWT dependencies.
+*   Added JWT related configurations in `application.yml`.
+
 ## Contributing
 
 To contribute to this project, you need to:

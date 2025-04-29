@@ -36,6 +36,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         if (user == null) {
             user = new User();
             user.setId(snowflakeIdProvider.nextId());
+            user.setUsername(email);
             user.setEmail(email);
             user.setName(name);
             userRepository.save(user);

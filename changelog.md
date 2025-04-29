@@ -44,3 +44,6 @@ All notable changes to this project will be documented in this file.
   - Updated test cases to provide email values for User entities.
   - Updated `application.yml` to use environment variables for sensitive information.
   - Updated `OAuth2AuthenticationSuccessHandler` to allow customization of the redirect URL.
+
+### Features
+- Added JWT support for authentication and authorization.

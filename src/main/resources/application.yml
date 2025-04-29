@@ -1,11 +1,18 @@
 server:
   port: 12799
 
+jwt:
+  secret: sqwsxcq3ffcasdqwd3dsa
+  expiration: 86400000
+  refresh-token:
+    expiration: 604800000
+
 spring:
   application:
     name: self-recorder
   r2dbc:
     url: r2dbc:h2:mem:testdb
+
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
@@ -22,8 +29,8 @@ spring:
       client:
         registration:
           google:
-            client-id: ""
-            client-secret: ""
+            client-id: "s"
+            client-secret: "w"
             scope: profile, email
 
 provider:
@@ -32,4 +39,5 @@ provider:
     data-center-id: 0
 
 oauth2:
-  redirect-url: /
+  # redirect to frontend react app
+  redirect-url: http://localhost:5173/redirect
