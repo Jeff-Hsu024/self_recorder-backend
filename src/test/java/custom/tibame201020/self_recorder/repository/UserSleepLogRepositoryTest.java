@@ -41,6 +41,8 @@ public class UserSleepLogRepositoryTest {
         User user = new User();
         user.setId(snowflakeIdProvider.nextId());
         user.setUsername("testUser");
+        user.setEmail("test@example.com");
+        user.setName("Test User");
         User savedUser = userRepository.save(user);
 
         UserSleepLog sleepLog1 = new UserSleepLog();

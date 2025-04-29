@@ -32,4 +32,19 @@ public class User {
     @Column(nullable = false, unique = true)
     @Schema(description = "使用者名稱")
     private String username;
+
+    /**
+     * 使用者 Email。
+     */
+    @Column(nullable = false, unique = true)
+    @Schema(description = "使用者 Email")
+    private String email;
+
+    /**
+     * 使用者姓名。
+     */
+    @Column(nullable = false)
+    @Schema(description = "使用者姓名")
+    private String name;
+
 }

@@ -24,14 +24,12 @@ spring:
           google:
             client-id: ""
             client-secret: ""
-          line:
-            client-id: ""
-            client-secret: ""
-          github:
-            client-id: ""
-            client-secret: ""
+            scope: profile, email
 
 provider:
   snowflake:
     worker-id: 0
     data-center-id: 0
+
+oauth2:
+  redirect-url: /

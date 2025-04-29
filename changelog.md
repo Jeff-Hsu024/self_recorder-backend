@@ -32,3 +32,15 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 *   修正了 Repository Test 中的參考完整性約束錯誤。
+
+## [Unreleased]
+
+### Added
+- Added Google OAuth2 login functionality to the project.
+  - Updated `pom.xml` to include Spring Security OAuth2 Client dependency.
+  - Updated `application.yml` to include Google OAuth2 client ID and secret.
+  - Added `CustomOAuth2UserService`, `OAuth2AuthenticationSuccessHandler`, and `OAuth2AuthenticationFailureHandler` classes to handle OAuth2 login.
+  - Updated `UserService` to configure Spring Security for OAuth2 login.
+  - Updated test cases to provide email values for User entities.
+  - Updated `application.yml` to use environment variables for sensitive information.
+  - Updated `OAuth2AuthenticationSuccessHandler` to allow customization of the redirect URL.
