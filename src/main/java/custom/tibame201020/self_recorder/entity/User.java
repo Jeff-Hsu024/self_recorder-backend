@@ -7,8 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-import java.util.UUID;
-
+import jakarta.persistence.*;
 /**
  * 使用者 Entity。
  * 記錄使用者的基本資訊，例如 ID 和使用者名稱。
@@ -24,7 +23,8 @@ public class User {
      */
     @Id
     @Schema(description = "使用者 ID")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     /**
      * 使用者名稱。

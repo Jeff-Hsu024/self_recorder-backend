@@ -30,7 +30,7 @@ public class UserExerciseLogServiceTest {
     public void getAllUserExerciseLogs_shouldReturnAllLogs() {
         // Arrange
         User user = new User();
-        user.setId(UUID.randomUUID());
+        user.setId(1L);
         user.setUsername("testUser");
 
         UserExerciseLog exerciseLog1 = new UserExerciseLog();
@@ -70,7 +70,7 @@ public class UserExerciseLogServiceTest {
     public void createUserExerciseLog_shouldCreateNewLog() {
         // Arrange
         User user = new User();
-        user.setId(UUID.randomUUID());
+        user.setId(1L);
         user.setUsername("testUser");
         String exerciseName = "重訓";
         String intensity = "高";

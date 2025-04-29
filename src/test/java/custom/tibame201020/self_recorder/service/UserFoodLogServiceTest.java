@@ -15,6 +15,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.description;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,7 +31,7 @@ public class UserFoodLogServiceTest {
     public void getAllUserFoodLogs_shouldReturnAllLogs() {
         // Arrange
         User user = new User();
-        user.setId(UUID.randomUUID());
+        user.setId(1L);
         user.setUsername("testUser");
 
         UserFoodLog foodLog1 = new UserFoodLog();
@@ -66,7 +67,7 @@ public class UserFoodLogServiceTest {
     public void createUserFoodLog_shouldCreateNewLog() {
         // Arrange
         User user = new User();
-        user.setId(UUID.randomUUID());
+        user.setId(1L);
         user.setUsername("testUser");
         String foodName = "牛肉麵";
         Double calories = 600.0;

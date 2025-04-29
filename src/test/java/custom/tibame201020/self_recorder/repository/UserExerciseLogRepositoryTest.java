@@ -2,6 +2,17 @@ package custom.tibame201020.self_recorder.repository;
 
 import custom.tibame201020.self_recorder.entity.User;
 import custom.tibame201020.self_recorder.entity.UserExerciseLog;
+import custom.tibame201020.self_recorder.provider.SnowflakeIdProvider;
+import custom.tibame201020.self_recorder.repository.UserExerciseLogRepository;
+import custom.tibame201020.self_recorder.repository.UserRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.mock.env.MockEnvironment;
+import org.springframework.beans.factory.annotation.Autowired;
+import custom.tibame201020.self_recorder.entity.User;
+import custom.tibame201020.self_recorder.entity.UserExerciseLog;
+import custom.tibame201020.self_recorder.repository.UserExerciseLogRepository;
+import custom.tibame201020.self_recorder.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -9,26 +20,35 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 public class UserExerciseLogRepositoryTest {
 
+    private SnowflakeIdProvider snowflakeIdProvider;
+
     @Autowired
-    private TestEntityManager entityManager;
+    private UserRepository userRepository;
 
     @Autowired
     private UserExerciseLogRepository userExerciseLogRepository;
+
+    @BeforeEach
+    public void setUp() {
+        MockEnvironment mockEnvironment = new MockEnvironment();
+        mockEnvironment.setProperty("provider.snowflake.worker-id", "0");
+        mockEnvironment.setProperty("provider.snowflake.data-center-id", "0");
+        snowflakeIdProvider = new SnowflakeIdProvider(mockEnvironment);
+    }
 
     @Test
     public void whenFindByUser_thenReturnUserExerciseLogs() {
         // given
         User user = new User();
-        user.setId(UUID.randomUUID());
+        user.setId(snowflakeIdProvider.nextId());
         user.setUsername("testUser");
-        entityManager.persist(user);
+        userRepository.save(user);
 
         UserExerciseLog exerciseLog1 = new UserExerciseLog();
         exerciseLog1.setUser(user);
@@ -39,7 +59,7 @@ public class UserExerciseLogRepositoryTest {
         exerciseLog1.setDescription("操場跑步");
         exerciseLog1.setExerciseTime(LocalDateTime.now());
         exerciseLog1.setLogTime(LocalDateTime.now());
-        entityManager.persist(exerciseLog1);
+        userExerciseLogRepository.save(exerciseLog1);
 
         UserExerciseLog exerciseLog2 = new UserExerciseLog();
         exerciseLog2.setUser(user);
@@ -50,9 +70,7 @@ public class UserExerciseLogRepositoryTest {
         exerciseLog2.setDescription("游泳池游泳");
         exerciseLog2.setExerciseTime(LocalDateTime.now());
         exerciseLog2.setLogTime(LocalDateTime.now());
-        entityManager.persist(exerciseLog2);
-
-        entityManager.flush();
+        userExerciseLogRepository.save(exerciseLog2);
 
         // when
         List<UserExerciseLog> found = userExerciseLogRepository.findAll();

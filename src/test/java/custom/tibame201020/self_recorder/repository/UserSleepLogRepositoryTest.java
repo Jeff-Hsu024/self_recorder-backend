@@ -2,47 +2,58 @@ package custom.tibame201020.self_recorder.repository;
 
 import custom.tibame201020.self_recorder.entity.User;
 import custom.tibame201020.self_recorder.entity.UserSleepLog;
+import custom.tibame201020.self_recorder.provider.SnowflakeIdProvider;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.mock.env.MockEnvironment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 public class UserSleepLogRepositoryTest {
 
+    private SnowflakeIdProvider snowflakeIdProvider;
+
     @Autowired
-    private TestEntityManager entityManager;
+    private UserRepository userRepository;
 
     @Autowired
     private UserSleepLogRepository userSleepLogRepository;
+
+    @BeforeEach
+    public void setUp() {
+        MockEnvironment mockEnvironment = new MockEnvironment();
+        mockEnvironment.setProperty("provider.snowflake.worker-id", "0");
+        mockEnvironment.setProperty("provider.snowflake.data-center-id", "0");
+        snowflakeIdProvider = new SnowflakeIdProvider(mockEnvironment);
+    }
 
     @Test
     public void whenFindByUser_thenReturnUserSleepLogs() {
         // given
         User user = new User();
-        user.setId(UUID.randomUUID());
+        user.setId(snowflakeIdProvider.nextId());
         user.setUsername("testUser");
-        entityManager.persist(user);
+        userRepository.save(user);
 
         UserSleepLog sleepLog1 = new UserSleepLog();
         sleepLog1.setUser(user);
         sleepLog1.setSleepTime(LocalDateTime.now().minusHours(8));
         sleepLog1.setWakeUpTime(LocalDateTime.now());
-        entityManager.persist(sleepLog1);
+        userSleepLogRepository.save(sleepLog1);
 
         UserSleepLog sleepLog2 = new UserSleepLog();
         sleepLog2.setUser(user);
         sleepLog2.setSleepTime(LocalDateTime.now().minusHours(7));
         sleepLog2.setWakeUpTime(LocalDateTime.now().plusHours(1));
-        entityManager.persist(sleepLog2);
-
-        entityManager.flush();
+        userSleepLogRepository.save(sleepLog2);
 
         // when
         List<UserSleepLog> found = userSleepLogRepository.findAll();

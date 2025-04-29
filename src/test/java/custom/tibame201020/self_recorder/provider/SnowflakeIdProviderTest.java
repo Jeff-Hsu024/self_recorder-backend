@@ -6,8 +6,6 @@ import org.springframework.mock.env.MockEnvironment;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SnowflakeIdProviderTest {
@@ -24,8 +22,8 @@ public class SnowflakeIdProviderTest {
 
     @Test
     public void testGenerateId() {
-        UUID id1 = snowflakeIdProvider.generateId();
-        UUID id2 = snowflakeIdProvider.generateId();
+        var id1 = snowflakeIdProvider.nextId();
+        var id2 = snowflakeIdProvider.nextId();
         assertNotNull(id1);
         assertNotNull(id2);
         assertNotEquals(id1, id2);
@@ -34,10 +32,10 @@ public class SnowflakeIdProviderTest {
     @Test
     public void testUniqueIdGeneration() {
         int numIds = 100000;
-        Set<UUID> generatedIds = new HashSet<>();
+        Set<Long> generatedIds = new HashSet<>();
 
         for (int i = 0; i < numIds; i++) {
-            UUID id = snowflakeIdProvider.generateId();
+            var id = snowflakeIdProvider.nextId();
             assertNotNull(id);
             generatedIds.add(id);
         }

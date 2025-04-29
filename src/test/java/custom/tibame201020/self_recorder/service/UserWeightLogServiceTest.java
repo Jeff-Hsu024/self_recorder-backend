@@ -30,7 +30,7 @@ public class UserWeightLogServiceTest {
     public void getAllUserWeightLogs_shouldReturnAllLogs() {
         // Arrange
         User user = new User();
-        user.setId(UUID.randomUUID());
+        user.setId(1L);
         user.setUsername("testUser");
 
         UserWeightLog weightLog1 = UserWeightLog.builder()
@@ -64,7 +64,7 @@ public class UserWeightLogServiceTest {
     public void createUserWeightLog_shouldCreateNewLog() {
         // Arrange
         User user = new User();
-        user.setId(UUID.randomUUID());
+        user.setId(1L);
         user.setUsername("testUser");
         Double weight = 75.0;
 

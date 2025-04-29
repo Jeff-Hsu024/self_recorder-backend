@@ -30,7 +30,7 @@ public class UserSleepLogServiceTest {
     public void getAllUserSleepLogs_shouldReturnAllLogs() {
         // Arrange
         User user = new User();
-        user.setId(UUID.randomUUID());
+        user.setId(1L);
         user.setUsername("testUser");
 
         UserSleepLog sleepLog1 = new UserSleepLog();
@@ -60,7 +60,7 @@ public class UserSleepLogServiceTest {
     public void createUserSleepLog_shouldCreateNewLog() {
         // Arrange
         User user = new User();
-        user.setId(UUID.randomUUID());
+        user.setId(1L);
         user.setUsername("testUser");
         LocalDateTime sleepTime = LocalDateTime.now().minusHours(8);
         LocalDateTime wakeUpTime = LocalDateTime.now();

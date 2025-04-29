@@ -3,8 +3,6 @@ package custom.tibame201020.self_recorder.provider;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
 @Component
 public class SnowflakeIdProvider {
 
@@ -45,7 +43,7 @@ public class SnowflakeIdProvider {
         this.dataCenterId = dataCenterId;
     }
 
-    public synchronized UUID generateId() {
+    public synchronized long nextId() {
         long timestamp = timeGen();
 
         if (timestamp < lastTimestamp) {
@@ -68,7 +66,7 @@ public class SnowflakeIdProvider {
                 (workerId << WORKER_ID_SHIFT) |
                 sequence;
 
-        return UUID.nameUUIDFromBytes(String.valueOf(id).getBytes());
+        return id;
     }
 
     protected long tilNextMillis(long lastTimestamp) {
