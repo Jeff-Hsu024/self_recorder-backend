@@ -28,3 +28,7 @@ All notable changes to this project will be documented in this file.
 *   Added WeightRecord entity.
 *   Created FoodCategory and FoodType entities.
 *   Modified Food entity to use FoodCategory and FoodCategory entities.
+
+### Fixed
+
+*   修正了 Repository Test 中的參考完整性約束錯誤。

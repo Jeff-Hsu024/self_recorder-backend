@@ -34,6 +34,10 @@ To use this project, you need to:
 *   使用 Mockito 進行 Mock 物件
 *   使用 Spring Boot Test 進行整合測試
 
+## 修正測試錯誤
+
+*   修正了 Repository Test 中的參考完整性約束錯誤。
+
 ## Contributing
 
 To contribute to this project, you need to:

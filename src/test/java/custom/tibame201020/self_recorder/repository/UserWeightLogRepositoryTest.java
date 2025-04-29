@@ -41,10 +41,10 @@ public class UserWeightLogRepositoryTest {
         User user = new User();
         user.setId(snowflakeIdProvider.nextId());
         user.setUsername("testUser");
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
 
         UserWeightLog weightLog1 = UserWeightLog.builder()
-                .user(user)
+                .user(savedUser)
                 .recordDatetime(LocalDateTime.now())
                 .weight(70.0)
                 .logTime(LocalDateTime.now())
@@ -52,7 +52,7 @@ public class UserWeightLogRepositoryTest {
         userWeightLogRepository.save(weightLog1);
 
         UserWeightLog weightLog2 = UserWeightLog.builder()
-                .user(user)
+                .user(savedUser)
                 .recordDatetime(LocalDateTime.now())
                 .weight(72.0)
                 .logTime(LocalDateTime.now())

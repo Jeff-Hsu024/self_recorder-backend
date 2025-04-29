@@ -41,10 +41,10 @@ public class UserFoodLogRepositoryTest {
         User user = new User();
         user.setId(snowflakeIdProvider.nextId());
         user.setUsername("testUser");
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
 
         UserFoodLog foodLog1 = new UserFoodLog();
-        foodLog1.setUser(user);
+        foodLog1.setUser(savedUser);
         foodLog1.setFoodName("雞腿便當");
         foodLog1.setCalories(800.0);
         foodLog1.setDescription("豐富的雞腿便當");
@@ -53,7 +53,7 @@ public class UserFoodLogRepositoryTest {
         userFoodLogRepository.save(foodLog1);
 
         UserFoodLog foodLog2 = new UserFoodLog();
-        foodLog2.setUser(user);
+        foodLog2.setUser(savedUser);
         foodLog2.setFoodName("滷肉飯");
         foodLog2.setCalories(500.0);
         foodLog2.setDescription("香噴噴的滷肉飯");

@@ -41,16 +41,16 @@ public class UserSleepLogRepositoryTest {
         User user = new User();
         user.setId(snowflakeIdProvider.nextId());
         user.setUsername("testUser");
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
 
         UserSleepLog sleepLog1 = new UserSleepLog();
-        sleepLog1.setUser(user);
+        sleepLog1.setUser(savedUser);
         sleepLog1.setSleepTime(LocalDateTime.now().minusHours(8));
         sleepLog1.setWakeUpTime(LocalDateTime.now());
         userSleepLogRepository.save(sleepLog1);
 
         UserSleepLog sleepLog2 = new UserSleepLog();
-        sleepLog2.setUser(user);
+        sleepLog2.setUser(savedUser);
         sleepLog2.setSleepTime(LocalDateTime.now().minusHours(7));
         sleepLog2.setWakeUpTime(LocalDateTime.now().plusHours(1));
         userSleepLogRepository.save(sleepLog2);

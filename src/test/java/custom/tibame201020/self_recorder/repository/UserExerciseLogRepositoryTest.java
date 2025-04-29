@@ -3,17 +3,9 @@ package custom.tibame201020.self_recorder.repository;
 import custom.tibame201020.self_recorder.entity.User;
 import custom.tibame201020.self_recorder.entity.UserExerciseLog;
 import custom.tibame201020.self_recorder.provider.SnowflakeIdProvider;
-import custom.tibame201020.self_recorder.repository.UserExerciseLogRepository;
-import custom.tibame201020.self_recorder.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.env.MockEnvironment;
-import org.springframework.beans.factory.annotation.Autowired;
-import custom.tibame201020.self_recorder.entity.User;
-import custom.tibame201020.self_recorder.entity.UserExerciseLog;
-import custom.tibame201020.self_recorder.repository.UserExerciseLogRepository;
-import custom.tibame201020.self_recorder.repository.UserRepository;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -48,10 +40,10 @@ public class UserExerciseLogRepositoryTest {
         User user = new User();
         user.setId(snowflakeIdProvider.nextId());
         user.setUsername("testUser");
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
 
         UserExerciseLog exerciseLog1 = new UserExerciseLog();
-        exerciseLog1.setUser(user);
+        exerciseLog1.setUser(savedUser);
         exerciseLog1.setExerciseName("跑步");
         exerciseLog1.setIntensity("高");
         exerciseLog1.setDuration(30.0);
@@ -62,7 +54,7 @@ public class UserExerciseLogRepositoryTest {
         userExerciseLogRepository.save(exerciseLog1);
 
         UserExerciseLog exerciseLog2 = new UserExerciseLog();
-        exerciseLog2.setUser(user);
+        exerciseLog2.setUser(savedUser);
         exerciseLog2.setExerciseName("游泳");
         exerciseLog2.setIntensity("中");
         exerciseLog2.setDuration(60.0);
