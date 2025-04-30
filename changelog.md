@@ -47,3 +47,6 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 - Added JWT support for authentication and authorization.
+
+### Changed
+- Added `javax.crypto.SecretKey` import to `JwtProvider.java`.

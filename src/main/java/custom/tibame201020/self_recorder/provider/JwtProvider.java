@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import javax.crypto.SecretKey;
+
 /**
  * JWT 提供者，用於生成和解析 JWT token。
  */
@@ -130,10 +132,10 @@ public class JwtProvider {
     private Claims extractAllClaims(String token) {
         return Jwts
                 .parser()
-                .setSigningKey(getSignInKey())
+                .verifyWith(getSignInKey())
                 .build()
-                .parseClaimsJws(token)
-                .getBody();
+                .parseSignedClaims(token)
+                .getPayload();
     }
 
     /**
@@ -141,7 +143,7 @@ public class JwtProvider {
      *
      * @return signing key
      */
-    private Key getSignInKey() {
+    private SecretKey getSignInKey() {
         byte[] keyBytes = secret.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
     }
