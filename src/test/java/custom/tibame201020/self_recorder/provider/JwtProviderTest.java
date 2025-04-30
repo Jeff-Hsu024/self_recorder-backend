@@ -44,4 +44,10 @@ class JwtProviderTest {
         String refreshToken = jwtProvider.generateRefreshToken(username);
         assertNotNull(refreshToken);
     }
+
+    @Test
+    void validateToken() {
+        String token = jwtProvider.generateToken(username);
+        assertDoesNotThrow(() -> jwtProvider.extractUsername(token));
+    }
 }

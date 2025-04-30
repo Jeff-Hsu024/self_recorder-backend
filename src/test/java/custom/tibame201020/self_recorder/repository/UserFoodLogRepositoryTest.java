@@ -71,4 +71,31 @@ public class UserFoodLogRepositoryTest {
         assertThat(found).hasSize(2);
         assertThat(found.get(0).getUser().getUsername()).isEqualTo("testUser");
     }
+
+    @Test
+    public void whenSaveUserFoodLog_thenItShouldBePersisted() {
+        // given
+        User user = new User();
+        user.setId(snowflakeIdProvider.nextId());
+        user.setUsername("testUser");
+        user.setEmail("test@example.com");
+        user.setName("Test User");
+        User savedUser = userRepository.save(user);
+
+        UserFoodLog foodLog = new UserFoodLog();
+        foodLog.setUser(savedUser);
+        foodLog.setFoodName("雞腿便當");
+        foodLog.setCalories(800.0);
+        foodLog.setDescription("豐富的雞腿便當");
+        foodLog.setEatTime(LocalDateTime.now());
+        foodLog.setLogTime(LocalDateTime.now());
+
+        // when
+        UserFoodLog savedFoodLog = userFoodLogRepository.save(foodLog);
+
+        // then
+        assertThat(savedFoodLog).isNotNull();
+        assertThat(savedFoodLog.getUser().getUsername()).isEqualTo("testUser");
+        assertThat(savedFoodLog.getFoodName()).isEqualTo("雞腿便當");
+    }
 }

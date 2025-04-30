@@ -3,6 +3,9 @@ package custom.tibame201020.self_recorder.provider;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
+/**
+ * Snowflake ID 提供者，用於生成分散式唯一 ID。
+ */
 @Component
 public class SnowflakeIdProvider {
 
@@ -28,6 +31,11 @@ public class SnowflakeIdProvider {
     private long sequence = 0L;
     private long lastTimestamp = -1L;
 
+    /**
+     * 建構子。
+     *
+     * @param environment Spring 環境
+     */
     public SnowflakeIdProvider(Environment environment) {
         long workerId = environment.getRequiredProperty(WORKER_ID_PROPERTY, Long.class);
         long dataCenterId = environment.getRequiredProperty(DATA_CENTER_ID_PROPERTY, Long.class);
@@ -43,6 +51,11 @@ public class SnowflakeIdProvider {
         this.dataCenterId = dataCenterId;
     }
 
+    /**
+     * 生成下一個 ID。
+     *
+     * @return 下一個 ID
+     */
     public synchronized long nextId() {
         long timestamp = timeGen();
 
@@ -69,6 +82,12 @@ public class SnowflakeIdProvider {
         return id;
     }
 
+    /**
+     * 阻塞到下一個毫秒。
+     *
+     * @param lastTimestamp 上一次的時間戳
+     * @return 下一個時間戳
+     */
     protected long tilNextMillis(long lastTimestamp) {
         long timestamp = timeGen();
         while (timestamp <= lastTimestamp) {
@@ -77,6 +96,11 @@ public class SnowflakeIdProvider {
         return timestamp;
     }
 
+    /**
+     * 生成時間戳。
+     *
+     * @return 當前時間戳
+     */
     protected long timeGen() {
         return System.currentTimeMillis();
     }

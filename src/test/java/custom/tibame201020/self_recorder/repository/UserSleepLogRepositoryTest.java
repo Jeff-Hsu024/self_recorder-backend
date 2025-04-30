@@ -64,4 +64,29 @@ public class UserSleepLogRepositoryTest {
         assertThat(found).hasSize(2);
         assertThat(found.get(0).getUser().getUsername()).isEqualTo("testUser");
     }
+
+    @Test
+    public void whenSaveUserSleepLog_thenItShouldBePersisted() {
+        // given
+        User user = new User();
+        user.setId(snowflakeIdProvider.nextId());
+        user.setUsername("testUser");
+        user.setEmail("test@example.com");
+        user.setName("Test User");
+        User savedUser = userRepository.save(user);
+
+        UserSleepLog sleepLog = new UserSleepLog();
+        sleepLog.setUser(savedUser);
+        sleepLog.setSleepTime(LocalDateTime.now().minusHours(8));
+        sleepLog.setWakeUpTime(LocalDateTime.now());
+
+        // when
+        UserSleepLog savedSleepLog = userSleepLogRepository.save(sleepLog);
+
+        // then
+        assertThat(savedSleepLog).isNotNull();
+        assertThat(savedSleepLog.getUser().getUsername()).isEqualTo("testUser");
+        assertThat(savedSleepLog.getSleepTime()).isNotNull();
+        assertThat(savedSleepLog.getWakeUpTime()).isNotNull();
+    }
 }

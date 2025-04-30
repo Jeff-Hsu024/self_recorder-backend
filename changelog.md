@@ -50,3 +50,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Added `javax.crypto.SecretKey` import to `JwtProvider.java`.
+
+### Added
+- Added Javadoc to all entities, repositories, and services.
+- Added unit tests to all repositories and services.

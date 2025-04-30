@@ -12,6 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
+/**
+ * 自定義 OAuth2 使用者服務。
+ * 用於處理 OAuth2 登入的使用者資訊。
+ */
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
@@ -21,12 +25,25 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     @Autowired
     private SnowflakeIdProvider snowflakeIdProvider;
 
+    /**
+     * 載入使用者。
+     *
+     * @param userRequest OAuth2 使用者請求
+     * @return OAuth2 使用者
+     * @throws OAuth2AuthenticationException OAuth2 驗證異常
+     */
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
         return processOAuth2User(oAuth2User);
     }
 
+    /**
+     * 處理 OAuth2 使用者。
+     *
+     * @param oAuth2User OAuth2 使用者
+     * @return OAuth2 使用者
+     */
     private OAuth2User processOAuth2User(OAuth2User oAuth2User) {
         Map<String, Object> attributes = oAuth2User.getAttributes();
         String email = (String) attributes.get("email");

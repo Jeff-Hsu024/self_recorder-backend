@@ -68,4 +68,30 @@ public class UserWeightLogRepositoryTest {
         assertThat(found).hasSize(2);
         assertThat(found.get(0).getUser().getUsername()).isEqualTo("testUser");
     }
+
+    @Test
+    public void whenSaveUserWeightLog_thenItShouldBePersisted() {
+        // given
+        User user = new User();
+        user.setId(snowflakeIdProvider.nextId());
+        user.setUsername("testUser");
+        user.setEmail("test@example.com");
+        user.setName("Test User");
+        User savedUser = userRepository.save(user);
+
+        UserWeightLog weightLog = UserWeightLog.builder()
+                .user(savedUser)
+                .recordDatetime(LocalDateTime.now())
+                .weight(70.0)
+                .logTime(LocalDateTime.now())
+                .build();
+
+        // when
+        UserWeightLog savedWeightLog = userWeightLogRepository.save(weightLog);
+
+        // then
+        assertThat(savedWeightLog).isNotNull();
+        assertThat(savedWeightLog.getUser().getUsername()).isEqualTo("testUser");
+        assertThat(savedWeightLog.getWeight()).isEqualTo(70.0);
+    }
 }

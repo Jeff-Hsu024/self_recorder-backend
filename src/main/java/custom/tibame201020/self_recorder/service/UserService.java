@@ -15,6 +15,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * 使用者服務。
+ * 提供使用者相關操作，例如取得、建立、更新和刪除使用者。
+ */
 @Service
 @EnableWebSecurity
 public class UserService {
@@ -31,6 +35,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * 配置 Spring Security 過濾器鏈。
+     *
+     * @param http HttpSecurity 物件
+     * @return SecurityFilterChain 物件
+     * @throws Exception 異常
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -47,22 +58,50 @@ public class UserService {
         return http.build();
     }
 
+    /**
+     * 取得所有使用者。
+     *
+     * @return 使用者列表
+     */
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
+    /**
+     * 根據 ID 取得使用者。
+     *
+     * @param id 使用者 ID
+     * @return 使用者
+     */
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
+    /**
+     * 建立使用者。
+     *
+     * @param user 使用者
+     * @return 使用者
+     */
     public User createUser(User user) {
         return userRepository.save(user);
     }
 
+    /**
+     * 更新使用者。
+     *
+     * @param user 使用者
+     * @return 使用者
+     */
     public User updateUser(User user) {
         return userRepository.save(user);
     }
 
+    /**
+     * 根據 ID 刪除使用者。
+     *
+     * @param id 使用者 ID
+     */
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }

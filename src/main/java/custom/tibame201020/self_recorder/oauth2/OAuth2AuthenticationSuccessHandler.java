@@ -10,12 +10,25 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * OAuth2 驗證成功處理器。
+ * 用於處理 OAuth2 驗證成功的情況。
+ */
 @Component
 public class OAuth2AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
     @Value("${oauth2.redirect-url}")
     private String redirectUrl;
 
+    /**
+     * 驗證成功時呼叫。
+     *
+     * @param request        HTTP 請求
+     * @param response       HTTP 回應
+     * @param authentication 驗證資訊
+     * @throws IOException      IO 異常
+     * @throws ServletException Servlet 異常
+     */
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws ServletException, IOException {

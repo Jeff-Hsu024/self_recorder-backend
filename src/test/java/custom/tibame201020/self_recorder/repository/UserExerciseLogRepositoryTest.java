@@ -73,4 +73,33 @@ public class UserExerciseLogRepositoryTest {
         assertThat(found).hasSize(2);
         assertThat(found.get(0).getUser().getUsername()).isEqualTo("testUser");
     }
+
+    @Test
+    public void whenSaveUserExerciseLog_thenItShouldBePersisted() {
+        // given
+        User user = new User();
+        user.setId(snowflakeIdProvider.nextId());
+        user.setUsername("testUser");
+        user.setEmail("test@example.com");
+        user.setName("Test User");
+        User savedUser = userRepository.save(user);
+
+        UserExerciseLog exerciseLog = new UserExerciseLog();
+        exerciseLog.setUser(savedUser);
+        exerciseLog.setExerciseName("跑步");
+        exerciseLog.setIntensity("高");
+        exerciseLog.setDuration(30.0);
+        exerciseLog.setCalories(300.0);
+        exerciseLog.setDescription("操場跑步");
+        exerciseLog.setExerciseTime(LocalDateTime.now());
+        exerciseLog.setLogTime(LocalDateTime.now());
+
+        // when
+        UserExerciseLog savedExerciseLog = userExerciseLogRepository.save(exerciseLog);
+
+        // then
+        assertThat(savedExerciseLog).isNotNull();
+        assertThat(savedExerciseLog.getUser().getUsername()).isEqualTo("testUser");
+        assertThat(savedExerciseLog.getExerciseName()).isEqualTo("跑步");
+    }
 }

@@ -42,4 +42,13 @@ public class SnowflakeIdProviderTest {
 
         assertEquals(numIds, generatedIds.size());
     }
+
+    @Test
+    public void testWorkerIdAndDataCenterId() {
+        MockEnvironment mockEnvironment = new MockEnvironment();
+        mockEnvironment.setProperty("provider.snowflake.worker-id", "1");
+        mockEnvironment.setProperty("provider.snowflake.data-center-id", "2");
+        SnowflakeIdProvider snowflakeIdProvider = new SnowflakeIdProvider(mockEnvironment);
+        assertNotNull(snowflakeIdProvider);
+    }
 }
