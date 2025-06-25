@@ -5,13 +5,26 @@ import custom.tibame201020.self_recorder.oauth2.CustomOAuth2UserService;
 import custom.tibame201020.self_recorder.oauth2.OAuth2AuthenticationFailureHandler;
 import custom.tibame201020.self_recorder.oauth2.OAuth2AuthenticationSuccessHandler;
 import custom.tibame201020.self_recorder.repository.UserRepository;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Service;
+import org.springframework.web.filter.GenericFilterBean;
 
+import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +59,7 @@ public class UserService {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfo -> userInfo
@@ -55,6 +68,23 @@ public class UserService {
                         .successHandler(oAuth2AuthenticationSuccessHandler)
                         .failureHandler(oAuth2AuthenticationFailureHandler)
                 );
+
+        http.addFilterBefore(new GenericFilterBean() {
+
+            @Override
+            public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
+                    throws IOException, ServletException {
+
+                Authentication fakeAuthentication = 
+                new UsernamePasswordAuthenticationToken("dev_user", null, Collections.singletonList(new SimpleGrantedAuthority("role")));
+
+                SecurityContextHolder.getContext().setAuthentication(fakeAuthentication);
+
+                arg2.doFilter(arg0, arg1);
+            }
+            
+        }, OAuth2LoginAuthenticationFilter.class);
+
         return http.build();
     }
 
